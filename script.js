@@ -16,11 +16,9 @@ function renderTasks() {
     const li = document.createElement("li");
     li.textContent = `${task.text} - ${task.date || "بدون موعد"}`;
     if (task.completed) li.classList.add("completed");
-
     li.addEventListener("click", () => toggleTask(index));
     taskList.appendChild(li);
   });
-
   updateStats();
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
@@ -28,9 +26,7 @@ function renderTasks() {
 function addTask() {
   const text = taskInput.value.trim();
   const date = taskDate.value;
-
   if (text === "") return alert("أدخل مهمة أولاً!");
-
   tasks.push({ text, date, completed: false });
   taskInput.value = "";
   taskDate.value = "";
