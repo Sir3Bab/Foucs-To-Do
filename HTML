@@ -1,52 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>قائمة المهام النهائية 🚀</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <h1>قائمة المهام النهائية 🚀</h1>
-
-    <!-- إدخال مهمة -->
-    <div class="input-section">
-      <input type="text" id="task-input" placeholder="أضف مهمة جديدة...">
-      <select id="category-select">
-        <option value="عمل">💼 عمل</option>
-        <option value="دراسة">📚 دراسة</option>
-        <option value="شخصي">🏠 شخصي</option>
-      </select>
-      <select id="priority-select">
-        <option value="high">عالية 🔴</option>
-        <option value="medium" selected>متوسطة 🟠</option>
-        <option value="low">منخفضة 🟢</option>
-      </select>
-      <input type="datetime-local" id="task-datetime">
-      <button id="add-btn">إضافة</button>
-    </div>
-
-    <!-- عداد المهام -->
-    <div class="task-counter">
-      <span id="total-tasks">المجموع: 0</span>
-      <span id="completed-tasks">مكتملة: 0</span>
-      <span id="remaining-tasks">متبقية: 0</span>
-    </div>
-
-    <!-- بحث المهام -->
-    <input type="text" id="search-input" placeholder="ابحث عن مهمة...">
-
-    <!-- قائمة المهام -->
-    <ul id="task-list"></ul>
-
-    <!-- أزرار الفوتر -->
-    <div class="footer">
-      <button id="clear-completed">مسح المهام المكتملة</button>
-      <button id="clear-all">مسح جميع المهام</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
