@@ -1,92 +1,60 @@
-/* إعدادات الصفحة العامة */
+/* الخلفية */
 body {
   font-family: 'Cairo', sans-serif;
-  background: linear-gradient(135deg, #0a0f14, #0e1b29, #197b8c, #dff7ff);
-  background-size: cover;
+  background: conic-gradient(from 0deg, #021b25, #044e64, #027c9c, #0e313a, #021b25);
+  background-size: 200% 200%;
+  animation: swirlBackground 25s linear infinite; /* حركة لولبية بطيئة */
   color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-  transition: background 2s ease-in-out;
+  overflow: hidden;
 }
 
-/* الصندوق الرئيسي */
-.container {
-  background: rgba(0, 10, 20, 0.9);
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-  padding: 30px;
-  width: 380px;
-  text-align: center;
-  transform: rotate(-3deg);
-  transition: transform 0.4s ease;
-}
-
-.container:hover {
-  transform: rotate(0deg);
-}
-
-/* العنوان */
-h1 {
-  color: #1cc5dc;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-/* المدخلات والأزرار */
-input, button {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 8px;
-  outline: none;
-  font-size: 15px;
-}
-
-/* حقل الكتابة */
-input {
-  background: #111a22;
-  color: white;
-}
-
-/* الزر */
-button {
-  background: #00b7ff;
-  color: white;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: #0095d9;
-}
-
-/* إحصائيات المهام */
-.stats {
-  margin-top: 15px;
-  color: #ccc;
-  font-size: 14px;
-}
-
-/* الحركات اللطيفة (دوران ناعم للخلفية) */
-@keyframes subtleMove {
+/* حركة الخلفية اللولبية */
+@keyframes swirlBackground {
   0% {
-    background-position: 0% 50%;
+    background-position: 0% 0%;
+    transform: rotate(0deg);
   }
   50% {
-    background-position: 100% 50%;
+    background-position: 100% 100%;
+    transform: rotate(180deg);
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 0% 0%;
+    transform: rotate(360deg);
   }
 }
 
-/* إضافة الحركة الهادئة للخلفية */
-body {
-  background: linear-gradient(135deg, #0a0f14, #0e1b29, #197b8c, #dff7ff);
-  background-size: 400% 400%;
-  animation: subtleMove 60s ease infinite;
+/* الكرت الرئيسي */
+.container {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: var(--border-radius);
+  width: 420px;
+  text-align: center;
+  box-shadow:
+    0 0 30px rgba(255, 255, 255, 0.08),
+    0 0 50px rgba(255, 255, 255, 0.05),
+    0 8px 25px rgba(0, 0, 0, 0.4);
+  transform: none; /* مستقيم */
+  transition: all 0.5s ease;
+  animation: pulseGlow 4s ease-in-out infinite; /* توهج نابض */
+}
+
+/* حركة التوهج */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 25px rgba(255, 255, 255, 0.08),
+      0 8px 25px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 45px rgba(255, 255, 255, 0.18),
+      0 12px 30px rgba(0, 0, 0, 0.5);
+  }
 }
