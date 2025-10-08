@@ -1,206 +1,92 @@
-/* إعداد الخطوط والألوان العامة */
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-
-:root {
-  --card-bg: #10131a;
-  --accent: #00bfff;
-  --accent-hover: #0099cc;
-  --text-color: #e8eaed;
-  --muted: #9aa0a6;
-  --border-radius: 16px;
-  --transition: 0.3s ease;
-}
-
-/* خلفية لولبية متدرجة تتحرك ببطء بين الأزرق والسماوي والأبيض والأسود */
+/* إعدادات الصفحة العامة */
 body {
   font-family: 'Cairo', sans-serif;
-  background: conic-gradient(
-    from 0deg,
-    #000000,
-    #004080,
-    #00bfff,
-    #e0ffff,
-    #000000
-  );
-  background-size: 300% 300%;
-  animation: swirl 25s linear infinite;
+  background: linear-gradient(135deg, #0a0f14, #0e1b29, #197b8c, #dff7ff);
+  background-size: cover;
   color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-  overflow: hidden;
+  transition: background 2s ease-in-out;
 }
 
-/* حركة الخلفية اللولبية */
-@keyframes swirl {
-  0% {
-    background-position: 0% 50%;
-    transform: rotate(0deg);
-    filter: hue-rotate(0deg);
-  }
-  50% {
-    background-position: 100% 50%;
-    transform: rotate(180deg);
-    filter: hue-rotate(90deg);
-  }
-  100% {
-    background-position: 0% 50%;
-    transform: rotate(360deg);
-    filter: hue-rotate(0deg);
-  }
-}
-
-/* الكرت الرئيسي */
+/* الصندوق الرئيسي */
 .container {
-  position: relative;
-  overflow: hidden;
-  background: var(--card-bg);
-  padding: 40px;
-  border-radius: var(--border-radius);
-  box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
-  width: 420px;
+  background: rgba(0, 10, 20, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  width: 380px;
   text-align: center;
-  backdrop-filter: blur(8px);
+  transform: rotate(-3deg);
+  transition: transform 0.4s ease;
 }
 
-/* توهج ناعم يدور حول الكرت */
-.container::before {
-  content: "";
-  position: absolute;
-  top: -60%;
-  left: -60%;
-  width: 220%;
-  height: 220%;
-  background: conic-gradient(
-    from 0deg,
-    rgba(0, 191, 255, 0.25),
-    rgba(255, 255, 255, 0.05),
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 191, 255, 0.25)
-  );
-  animation: rotateGlow 12s linear infinite;
-  pointer-events: none;
-  z-index: 0;
-  border-radius: 50%;
-}
-
-@keyframes rotateGlow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* اجعل المحتوى فوق التوهج */
-.container > * {
-  position: relative;
-  z-index: 1;
+.container:hover {
+  transform: rotate(0deg);
 }
 
 /* العنوان */
 h1 {
-  font-size: 26px;
-  margin-bottom: 25px;
-  color: var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  color: #1cc5dc;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
-/* الحقول */
-input, button, select {
-  padding: 10px 15px;
+/* المدخلات والأزرار */
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
   border: none;
   border-radius: 8px;
-  font-size: 15px;
   outline: none;
-  transition: var(--transition);
+  font-size: 15px;
 }
 
-input[type="text"], input[type="datetime-local"], select {
-  width: 100%;
-  margin-bottom: 15px;
-  background-color: #1c1f26;
-  color: var(--text-color);
+/* حقل الكتابة */
+input {
+  background: #111a22;
+  color: white;
 }
 
 /* الزر */
 button {
-  background-color: var(--accent);
+  background: #00b7ff;
   color: white;
   cursor: pointer;
-  width: 100%;
-  font-weight: bold;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.3s;
 }
 
 button:hover {
-  background-color: var(--accent-hover);
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+  background: #0095d9;
 }
 
-button:active {
-  transform: scale(0.97);
-}
-
-/* الإحصائيات */
+/* إحصائيات المهام */
 .stats {
-  margin-top: 20px;
+  margin-top: 15px;
+  color: #ccc;
   font-size: 14px;
-  color: var(--muted);
 }
 
-/* المهام */
-.task-list {
-  margin-top: 20px;
-  text-align: right;
-}
-
-.task {
-  background-color: #1e232b;
-  padding: 10px 15px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--text-color);
-  transition: var(--transition);
-}
-
-.task:hover {
-  background-color: #2b3240;
-}
-
-.task.completed {
-  text-decoration: line-through;
-  color: #6e767d;
-}
-
-/* زر الحذف */
-.delete-btn {
-  background: none;
-  border: none;
-  color: #ff4c4c;
-  font-size: 18px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.delete-btn:hover {
-  color: #ff7070;
-  transform: rotate(10deg);
-}
-
-/* استجابة للشاشات الصغيرة */
-@media (max-width: 480px) {
-  .container {
-    width: 90%;
-    padding: 25px;
+/* الحركات اللطيفة (دوران ناعم للخلفية) */
+@keyframes subtleMove {
+  0% {
+    background-position: 0% 50%;
   }
-  h1 {
-    font-size: 22px;
+  50% {
+    background-position: 100% 50%;
   }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* إضافة الحركة الهادئة للخلفية */
+body {
+  background: linear-gradient(135deg, #0a0f14, #0e1b29, #197b8c, #dff7ff);
+  background-size: 400% 400%;
+  animation: subtleMove 60s ease infinite;
 }
