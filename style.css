@@ -9,6 +9,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  perspective: none; /* إلغاء أي عمق أو دوران ثلاثي */
+  transform: none;   /* إلغاء أي تحويل عام */
 }
 
 .container {
@@ -17,8 +20,10 @@ body {
   border-radius: 15px;
   width: 90%;
   max-width: 400px;
-  margin: auto;
+  margin: 0 auto;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  transform: none !important; /* يوقف أي دوران */
+  rotate: 0deg !important;
 }
 
 h1 {
@@ -53,6 +58,7 @@ button:hover {
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 li {
