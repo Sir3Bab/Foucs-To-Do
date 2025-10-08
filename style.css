@@ -14,14 +14,38 @@
 
 body {
   font-family: 'Cairo', sans-serif;
-  background-color: var(--bg-color);
+  background: conic-gradient(from 0deg, #0f2027, #203a43, #2c5364, #0f2027);
+  background-size: cover;
   color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+  animation: spin 10s linear infinite;
 }
+
+/* حركة الدوران اللولبي */
+@keyframes spin {
+  from {
+    background: conic-gradient(from 0deg, #0f2027, #203a43, #2c5364, #0f2027);
+  }
+  to {
+    background: conic-gradient(from 360deg, #0f2027, #203a43, #2c5364, #0f2027);
+  }
+}
+
+
+/* حركة اللف */
+@keyframes swirl {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
 
 /* الكرت الرئيسي */
 .container {
@@ -132,4 +156,24 @@ button:hover {
   h1 {
     font-size: 22px;
   }
+}
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(0, 123, 255, 0.1), transparent 70%);
+  animation: glow 6s linear infinite;
+}
+
+@keyframes glow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
