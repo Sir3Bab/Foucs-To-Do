@@ -2,7 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 
 :root {
-  --bg-color: #0f1116;
+  --bg1: #0f2027;
+  --bg2: #203a43;
+  --bg3: #2c5364;
   --card-bg: #1a1d24;
   --accent: #007bff;
   --accent-hover: #0056d2;
@@ -12,37 +14,62 @@
   --transition: 0.3s ease;
 }
 
+/* خلفية الصفحة (لولبية متحركة) */
 body {
   font-family: 'Cairo', sans-serif;
-  background: conic-gradient(from 0deg, #0f2027, #203a43, #2c5364, #0f2027);
-  background-size: 200% 200%;
+  background: conic-gradient(from 0deg, var(--bg1), var(--bg2), var(--bg3), var(--bg1));
+  background-size: 400% 400%;
+  animation: swirl 15s linear infinite;
   color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
-  animation: swirl 15s linear infinite;
 }
 
-/* حركة الخلفية بشكل لولبي */
+/* حركة الخلفية */
 @keyframes swirl {
-  from {
-    background: conic-gradient(from 0deg, #0f2027, #203a43, #2c5364, #0f2027);
-  }
-  to {
-    background: conic-gradient(from 360deg, #0f2027, #203a43, #2c5364, #0f2027);
-  }
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
 }
 
 /* الكرت الرئيسي */
 .container {
+  position: relative;
+  overflow: hidden;
   background: var(--card-bg);
   padding: 40px;
   border-radius: var(--border-radius);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   width: 420px;
   text-align: center;
+}
+
+/* الهالة / التوهّج المتحرك */
+.container::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(0, 123, 255, 0.08), transparent 70%);
+  animation: glow 6s linear infinite;
+  pointer-events: none; /* يمنع التداخل مع النقر */
+  z-index: 0;
+}
+
+/* تأكد أن المحتوى فوق التوهّج */
+.container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* حركة التوهج */
+@keyframes glow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* العنوان */
@@ -145,23 +172,8 @@ button:hover {
     font-size: 22px;
   }
 }
-.container {
-  position: relative;
-  overflow: hidden;
-}
-
-.container::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, rgba(0, 123, 255, 0.1), transparent 70%);
-  animation: glow 6s linear infinite;
-}
-
-@keyframes glow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* تحسينات إضافية */
+input::placeholder {
+  color: var(--muted);
+  opacity: 1; /* لجعل النص واضحًا */
 }
