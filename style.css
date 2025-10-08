@@ -2,36 +2,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 
 :root {
-  --bg1: #0f2027;
-  --bg2: #203a43;
-  --bg3: #2c5364;
-  --card-bg: #1a1d24;
-  --accent: #007bff;
-  --accent-hover: #0056d2;
+  --card-bg: #10131a;
+  --accent: #00bfff;
+  --accent-hover: #0099cc;
   --text-color: #e8eaed;
   --muted: #9aa0a6;
   --border-radius: 16px;
   --transition: 0.3s ease;
 }
 
-/* خلفية الصفحة (لولبية متحركة) */
+/* خلفية لولبية متدرجة تتحرك ببطء بين الأزرق والسماوي والأبيض والأسود */
 body {
   font-family: 'Cairo', sans-serif;
-  background: conic-gradient(from 0deg, var(--bg1), var(--bg2), var(--bg3), var(--bg1));
-  background-size: 400% 400%;
-  animation: swirl 15s linear infinite;
+  background: conic-gradient(
+    from 0deg,
+    #000000,
+    #004080,
+    #00bfff,
+    #e0ffff,
+    #000000
+  );
+  background-size: 300% 300%;
+  animation: swirl 25s linear infinite;
   color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+  overflow: hidden;
 }
 
-/* حركة الخلفية */
+/* حركة الخلفية اللولبية */
 @keyframes swirl {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
+  0% {
+    background-position: 0% 50%;
+    transform: rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 100% 50%;
+    transform: rotate(180deg);
+    filter: hue-rotate(90deg);
+  }
+  100% {
+    background-position: 0% 50%;
+    transform: rotate(360deg);
+    filter: hue-rotate(0deg);
+  }
 }
 
 /* الكرت الرئيسي */
@@ -41,35 +59,42 @@ body {
   background: var(--card-bg);
   padding: 40px;
   border-radius: var(--border-radius);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
   width: 420px;
   text-align: center;
+  backdrop-filter: blur(8px);
 }
 
-/* الهالة / التوهّج المتحرك */
+/* توهج ناعم يدور حول الكرت */
 .container::before {
   content: "";
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, rgba(0, 123, 255, 0.08), transparent 70%);
-  animation: glow 6s linear infinite;
-  pointer-events: none; /* يمنع التداخل مع النقر */
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(0, 191, 255, 0.25),
+    rgba(255, 255, 255, 0.05),
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 191, 255, 0.25)
+  );
+  animation: rotateGlow 12s linear infinite;
+  pointer-events: none;
   z-index: 0;
+  border-radius: 50%;
 }
 
-/* تأكد أن المحتوى فوق التوهّج */
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* اجعل المحتوى فوق التوهج */
 .container > * {
   position: relative;
   z-index: 1;
-}
-
-/* حركة التوهج */
-@keyframes glow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 
 /* العنوان */
@@ -96,7 +121,7 @@ input, button, select {
 input[type="text"], input[type="datetime-local"], select {
   width: 100%;
   margin-bottom: 15px;
-  background-color: #2a2e38;
+  background-color: #1c1f26;
   color: var(--text-color);
 }
 
@@ -107,11 +132,17 @@ button {
   cursor: pointer;
   width: 100%;
   font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
   background-color: var(--accent-hover);
-  transform: scale(1.03);
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+}
+
+button:active {
+  transform: scale(0.97);
 }
 
 /* الإحصائيات */
@@ -128,7 +159,7 @@ button:hover {
 }
 
 .task {
-  background-color: #2a2e38;
+  background-color: #1e232b;
   padding: 10px 15px;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -140,7 +171,7 @@ button:hover {
 }
 
 .task:hover {
-  background-color: #333843;
+  background-color: #2b3240;
 }
 
 .task.completed {
@@ -148,7 +179,7 @@ button:hover {
   color: #6e767d;
 }
 
-/* الأزرار الصغيرة */
+/* زر الحذف */
 .delete-btn {
   background: none;
   border: none;
@@ -160,6 +191,7 @@ button:hover {
 
 .delete-btn:hover {
   color: #ff7070;
+  transform: rotate(10deg);
 }
 
 /* استجابة للشاشات الصغيرة */
@@ -171,9 +203,4 @@ button:hover {
   h1 {
     font-size: 22px;
   }
-}
-/* تحسينات إضافية */
-input::placeholder {
-  color: var(--muted);
-  opacity: 1; /* لجعل النص واضحًا */
 }
