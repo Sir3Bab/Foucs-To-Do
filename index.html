@@ -1,50 +1,29 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>قائمة المهام - Focus To-Do</title>
   <link rel="stylesheet" href="style.css" />
-
-  <style>
-    body {
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-    body.loaded {
-      opacity: 1;
-    }
-  </style>
 </head>
-
 <body>
-  <header>
-    <nav>
-      <h2>Focus To-Do ✨</h2>
-      <p>نظّم مهامك بطريقة ذكية ومريحة</p>
-    </nav>
-  </header>
-
   <div class="container">
     <h1>📋 قائمة المهام</h1>
-
     <div class="input-area">
       <input type="text" id="taskInput" placeholder="أضف مهمة جديدة..." />
       <input type="datetime-local" id="taskTime" />
-      <button id="addBtn">إضافة</button>
+      <button id="addBtn" type="button">إضافة</button>
     </div>
 
     <ul id="taskList"></ul>
 
     <div class="stats">
-      <p>إجمالي المهام: <span id="totalTasks">0</span></p>
-      <p>المهام المكتملة: <span id="completedTasks">0</span></p>
+      <p>المهام الكلية: <span id="totalTasks">0</span></p>
+      <p>المنجزة: <span id="completedTasks">0</span></p>
       <p>المتبقية: <span id="remainingTasks">0</span></p>
     </div>
 
-    <button id="clearAllBtn" style="margin-top:15px; background:#ff4444; color:white; border:none; border-radius:8px; padding:10px 15px; cursor:pointer;">
-      🗑️ مسح جميع المهام
-    </button>
+    <button id="clearAllBtn" class="clear">🗑️ مسح جميع المهام</button>
   </div>
 
   <footer>
@@ -52,24 +31,5 @@
   </footer>
 
   <script src="script.js"></script>
-
-  <script>
-    window.addEventListener("load", () => {
-      document.body.classList.add("loaded");
-    });
-
-    const clearBtn = document.getElementById("clearAllBtn");
-    const taskList = document.getElementById("taskList");
-
-    clearBtn.addEventListener("click", () => {
-      if (confirm("هل أنت متأكد من مسح جميع المهام؟")) {
-        taskList.innerHTML = "";
-        localStorage.clear();
-        document.getElementById("totalTasks").textContent = 0;
-        document.getElementById("completedTasks").textContent = 0;
-        document.getElementById("remainingTasks").textContent = 0;
-      }
-    });
-  </script>
 </body>
 </html>
