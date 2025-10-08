@@ -1,60 +1,103 @@
-/* الخلفية */
 body {
-  font-family: 'Cairo', sans-serif;
-  background: conic-gradient(from 0deg, #021b25, #044e64, #027c9c, #0e313a, #021b25);
-  background-size: 200% 200%;
-  animation: swirlBackground 25s linear infinite; /* حركة لولبية بطيئة */
-  color: var(--text-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
-}
-
-/* حركة الخلفية اللولبية */
-@keyframes swirlBackground {
-  0% {
-    background-position: 0% 0%;
-    transform: rotate(0deg);
-  }
-  50% {
-    background-position: 100% 100%;
-    transform: rotate(180deg);
-  }
-  100% {
-    background-position: 0% 0%;
-    transform: rotate(360deg);
-  }
-}
-
-/* الكرت الرئيسي */
-.container {
-  background: var(--card-bg);
-  padding: 40px;
-  border-radius: var(--border-radius);
-  width: 420px;
+  font-family: "Tajawal", sans-serif;
+  background: linear-gradient(135deg, #003344, #002233);
+  color: #fff;
   text-align: center;
-  box-shadow:
-    0 0 30px rgba(255, 255, 255, 0.08),
-    0 0 50px rgba(255, 255, 255, 0.05),
-    0 8px 25px rgba(0, 0, 0, 0.4);
-  transform: none; /* مستقيم */
-  transition: all 0.5s ease;
-  animation: pulseGlow 4s ease-in-out infinite; /* توهج نابض */
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* حركة التوهج */
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow:
-      0 0 25px rgba(255, 255, 255, 0.08),
-      0 8px 25px rgba(0, 0, 0, 0.4);
-  }
-  50% {
-    box-shadow:
-      0 0 45px rgba(255, 255, 255, 0.18),
-      0 12px 30px rgba(0, 0, 0, 0.5);
-  }
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+  margin-bottom: 15px;
+}
+
+.input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+input, button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+}
+
+button {
+  background-color: #00bfa6;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #009e8a;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+  position: relative;
+  transition: 0.3s;
+}
+
+li.completed {
+  text-decoration: line-through;
+  color: #aaa;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+li button {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  background-color: transparent;
+  border: none;
+  color: #ff6666;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.stats {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.clear {
+  background-color: #ff4444;
+  margin-top: 10px;
+}
+
+.clear:hover {
+  background-color: #cc0000;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #ccc;
 }
