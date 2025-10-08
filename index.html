@@ -6,24 +6,14 @@
   <title>🧠 قائمة المهام - Focus To-Do</title>
   <meta name="description" content="نظّم يومك بسهولة مع Focus To-Do — أضف مهامك، راقب إنجازك، وابقَ مركزًا.">
   <meta name="theme-color" content="#0f2027">
-
-  <!-- أيقونة التبويب -->
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906334.png" type="image/png">
-
-  <!-- خط جميل -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- الأنماط -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- تحسين المشاركة في وسائل التواصل -->
   <meta property="og:title" content="Focus To-Do - قائمة المهام">
   <meta property="og:description" content="نظّم مهامك بطريقة أنيقة وسهلة.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/906/906334.png">
   <meta property="og:url" content="https://sir3bab.github.io/Foucs-To-Do/">
-
-  <!-- تأثيرات بسيطة عند تحميل الصفحة -->
   <style>
     body {
       opacity: 0;
@@ -36,7 +26,6 @@
 </head>
 
 <body>
-  <!-- شريط علوي بسيط -->
   <header>
     <nav>
       <h2>Focus To-Do ✨</h2>
@@ -44,42 +33,32 @@
     </nav>
   </header>
 
-  <!-- الكرت الرئيسي -->
   <div class="container">
     <h1>📋 قائمة المهام</h1>
-
     <div class="input-area">
       <input type="text" id="taskInput" placeholder="أضف مهمة جديدة...">
       <input type="datetime-local" id="taskTime">
       <button id="addBtn">إضافة</button>
     </div>
-
     <ul id="taskList"></ul>
-
     <div class="stats">
       <p>المهام الكلية: <span id="totalTasks">0</span></p>
       <p>المنجزة: <span id="completedTasks">0</span></p>
       <p>المتبقية: <span id="remainingTasks">0</span></p>
     </div>
-
-    <!-- زر لإفراغ المهام -->
     <button id="clearAllBtn" style="margin-top:15px; background:#ff4d4d; color:white; border:none; border-radius:8px; padding:10px 15px; cursor:pointer;">مسح جميع المهام</button>
   </div>
 
-  <!-- تذييل -->
   <footer>
     <p>تم التطوير بواسطة <strong>Sir3bab</strong> ❤️ | جميع الحقوق محفوظة © 2025</p>
   </footer>
 
-  <!-- سكربت -->
   <script src="script.js"></script>
   <script>
-    // تأثير تحميل الصفحة
     window.addEventListener('load', () => {
       document.body.classList.add('loaded');
     });
 
-    // زر حذف الكل
     const clearBtn = document.getElementById('clearAllBtn');
     const taskList = document.getElementById('taskList');
     clearBtn.addEventListener('click', () => {
