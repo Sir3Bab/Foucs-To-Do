@@ -2,30 +2,52 @@
 
 body {
   font-family: 'Cairo', sans-serif;
-  background: linear-gradient(135deg, #006d77, #00b4d8);
-  color: #fff;
   margin: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  transition: background 1s ease-in-out;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #002b36;
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: conic-gradient(from 180deg at 50% 50%, #0077b6, #00b4d8, #90e0ef, #0077b6);
+  animation: swirl 20s linear infinite;
+  filter: blur(120px) brightness(1.2);
+  opacity: 0.6;
+}
+
+@keyframes swirl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .container {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 30px 40px;
-  border-radius: 20px;
+  position: relative;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  padding: 35px 45px;
+  border-radius: 25px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
   text-align: center;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   animation: fadeIn 1.5s ease-in-out;
+  transition: box-shadow 0.5s ease;
+}
+
+.container:hover {
+  box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
 }
 
 h1 {
-  margin-bottom: 20px;
-  color: #fff;
+  margin-bottom: 25px;
   font-size: 2rem;
+  color: #fff;
 }
 
 .input-section {
@@ -61,7 +83,7 @@ input, button {
 ul {
   list-style: none;
   padding: 0;
-  margin: 20px 0;
+  margin: 25px 0;
 }
 
 li {
@@ -70,6 +92,10 @@ li {
   padding: 10px;
   border-radius: 8px;
   transition: all 0.3s ease-in-out;
+}
+
+li:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 li.completed {
