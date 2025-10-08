@@ -5,16 +5,16 @@ const taskList = document.getElementById("taskList");
 const totalTasksEl = document.getElementById("totalTasks");
 const completedTasksEl = document.getElementById("completedTasks");
 const remainingTasksEl = document.getElementById("remainingTasks");
+const clearBtn = document.getElementById("clearAllBtn");
 
-// تحميل المهام المحفوظة من localStorage
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-// حفظ المهام في localStorage
+// حفظ المهام في التخزين المحلي
 function saveTasks() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// عرض المهام في الصفحة
+// عرض المهام
 function renderTasks() {
   taskList.innerHTML = "";
   tasks.forEach((task, index) => {
@@ -23,18 +23,18 @@ function renderTasks() {
 
     if (task.completed) li.classList.add("completed");
 
-    // عند الضغط على المهمة يتم تفعيل أو إلغاء الإكمال
+    // عند الضغط على المهمة - إكمالها
     li.addEventListener("click", () => {
       task.completed = !task.completed;
       saveTasks();
       renderTasks();
     });
 
-    // زر الحذف الفردي
+    // زر حذف المهمة
     const delBtn = document.createElement("button");
     delBtn.textContent = "🗑️";
     delBtn.onclick = (e) => {
-      e.stopPropagation(); // منع التفعيل عند الضغط على الزر
+      e.stopPropagation(); // منع تفعيل الكليك العادي
       tasks.splice(index, 1);
       saveTasks();
       renderTasks();
@@ -43,13 +43,12 @@ function renderTasks() {
     li.appendChild(delBtn);
     taskList.appendChild(li);
 
-    // تنبيه عند انتهاء وقت المهمة
+    // تنبيه عند انتهاء الوقت
     if (!task.completed && new Date(task.datetime) <= new Date()) {
       notifyUser(`انتهى وقت المهمة: ${task.text}`);
     }
   });
 
-  // تحديث الإحصائيات
   const total = tasks.length;
   const completed = tasks.filter((t) => t.completed).length;
   const remaining = total - completed;
@@ -59,7 +58,7 @@ function renderTasks() {
   remainingTasksEl.textContent = remaining;
 }
 
-// إرسال إشعارات
+// إشعارات
 function notifyUser(message) {
   if ("Notification" in window && Notification.permission === "granted") {
     new Notification(message);
@@ -72,7 +71,9 @@ if ("Notification" in window && Notification.permission !== "granted") {
 }
 
 // إضافة مهمة جديدة
-addBtn.addEventListener("click", () => {
+addBtn.addEventListener("click", (e) => {
+  e.preventDefault(); // 🔥 هذا يمنع إعادة تحميل الصفحة
+
   const text = taskInput.value.trim();
   const datetime = taskTime.value;
 
@@ -88,20 +89,10 @@ addBtn.addEventListener("click", () => {
   taskTime.value = "";
 });
 
-// حفظ المهام عند إغلاق أو تحديث الصفحة
-window.addEventListener("beforeunload", () => {
-  saveTasks();
-});
-
-// عند تحميل الصفحة
-window.addEventListener("load", () => {
-  renderTasks();
-});
-
-// زر "مسح جميع المهام"
-const clearBtn = document.getElementById("clearAllBtn");
+// مسح جميع المهام
 if (clearBtn) {
-  clearBtn.addEventListener("click", () => {
+  clearBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     if (confirm("هل أنت متأكد من مسح جميع المهام؟")) {
       tasks = [];
       saveTasks();
@@ -109,3 +100,8 @@ if (clearBtn) {
     }
   });
 }
+
+// تحميل المهام عند الدخول
+window.addEventListener("load", () => {
+  renderTasks();
+});
