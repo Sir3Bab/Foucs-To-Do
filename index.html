@@ -1,107 +1,75 @@
-const taskInput = document.getElementById("taskInput");
-const taskTime = document.getElementById("taskTime");
-const addBtn = document.getElementById("addBtn");
-const taskList = document.getElementById("taskList");
-const totalTasksEl = document.getElementById("totalTasks");
-const completedTasksEl = document.getElementById("completedTasks");
-const remainingTasksEl = document.getElementById("remainingTasks");
-const clearBtn = document.getElementById("clearAllBtn");
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>قائمة المهام - Focus To-Do</title>
+  <link rel="stylesheet" href="style.css" />
 
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  <style>
+    body {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    body.loaded {
+      opacity: 1;
+    }
+  </style>
+</head>
 
-// حفظ المهام في التخزين المحلي
-function saveTasks() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-}
+<body>
+  <header>
+    <nav>
+      <h2>Focus To-Do ✨</h2>
+      <p>نظّم مهامك بطريقة ذكية ومريحة</p>
+    </nav>
+  </header>
 
-// عرض المهام
-function renderTasks() {
-  taskList.innerHTML = "";
-  tasks.forEach((task, index) => {
-    const li = document.createElement("li");
-    li.textContent = `${task.text} (${new Date(task.datetime).toLocaleString("ar-SA")})`;
+  <div class="container">
+    <h1>📋 قائمة المهام</h1>
 
-    if (task.completed) li.classList.add("completed");
+    <div class="input-area">
+      <input type="text" id="taskInput" placeholder="أضف مهمة جديدة..." />
+      <input type="datetime-local" id="taskTime" />
+      <button id="addBtn">إضافة</button>
+    </div>
 
-    // عند الضغط على المهمة - إكمالها
-    li.addEventListener("click", () => {
-      task.completed = !task.completed;
-      saveTasks();
-      renderTasks();
+    <ul id="taskList"></ul>
+
+    <div class="stats">
+      <p>إجمالي المهام: <span id="totalTasks">0</span></p>
+      <p>المهام المكتملة: <span id="completedTasks">0</span></p>
+      <p>المتبقية: <span id="remainingTasks">0</span></p>
+    </div>
+
+    <button id="clearAllBtn" style="margin-top:15px; background:#ff4444; color:white; border:none; border-radius:8px; padding:10px 15px; cursor:pointer;">
+      🗑️ مسح جميع المهام
+    </button>
+  </div>
+
+  <footer>
+    <p>تم التطوير بواسطة <strong>Sir3bab</strong> ❤️ | 2025</p>
+  </footer>
+
+  <script src="script.js"></script>
+
+  <script>
+    window.addEventListener("load", () => {
+      document.body.classList.add("loaded");
     });
 
-    // زر حذف المهمة
-    const delBtn = document.createElement("button");
-    delBtn.textContent = "🗑️";
-    delBtn.onclick = (e) => {
-      e.stopPropagation(); // منع تفعيل الكليك العادي
-      tasks.splice(index, 1);
-      saveTasks();
-      renderTasks();
-    };
+    const clearBtn = document.getElementById("clearAllBtn");
+    const taskList = document.getElementById("taskList");
 
-    li.appendChild(delBtn);
-    taskList.appendChild(li);
-
-    // تنبيه عند انتهاء الوقت
-    if (!task.completed && new Date(task.datetime) <= new Date()) {
-      notifyUser(`انتهى وقت المهمة: ${task.text}`);
-    }
-  });
-
-  const total = tasks.length;
-  const completed = tasks.filter((t) => t.completed).length;
-  const remaining = total - completed;
-
-  totalTasksEl.textContent = total;
-  completedTasksEl.textContent = completed;
-  remainingTasksEl.textContent = remaining;
-}
-
-// إشعارات
-function notifyUser(message) {
-  if ("Notification" in window && Notification.permission === "granted") {
-    new Notification(message);
-  }
-}
-
-// طلب الإذن بالإشعارات
-if ("Notification" in window && Notification.permission !== "granted") {
-  Notification.requestPermission();
-}
-
-// إضافة مهمة جديدة
-addBtn.addEventListener("click", (e) => {
-  e.preventDefault(); // 🔥 هذا يمنع إعادة تحميل الصفحة
-
-  const text = taskInput.value.trim();
-  const datetime = taskTime.value;
-
-  if (text === "" || datetime === "") {
-    alert("يرجى إدخال نص المهمة ووقتها.");
-    return;
-  }
-
-  tasks.push({ text, datetime, completed: false });
-  saveTasks();
-  renderTasks();
-  taskInput.value = "";
-  taskTime.value = "";
-});
-
-// مسح جميع المهام
-if (clearBtn) {
-  clearBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (confirm("هل أنت متأكد من مسح جميع المهام؟")) {
-      tasks = [];
-      saveTasks();
-      renderTasks();
-    }
-  });
-}
-
-// تحميل المهام عند الدخول
-window.addEventListener("load", () => {
-  renderTasks();
-});
+    clearBtn.addEventListener("click", () => {
+      if (confirm("هل أنت متأكد من مسح جميع المهام؟")) {
+        taskList.innerHTML = "";
+        localStorage.clear();
+        document.getElementById("totalTasks").textContent = 0;
+        document.getElementById("completedTasks").textContent = 0;
+        document.getElementById("remainingTasks").textContent = 0;
+      }
+    });
+  </script>
+</body>
+</html>
