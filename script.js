@@ -1,70 +1,72 @@
-const taskInput = document.getElementById("taskInput");
-const taskTime = document.getElementById("taskTime");
-const addBtn = document.getElementById("addBtn");
-const taskList = document.getElementById("taskList");
-const totalTasksEl = document.getElementById("totalTasks");
-const completedTasksEl = document.getElementById("completedTasks");
-const remainingTasksEl = document.getElementById("remainingTasks");
-const clearAllBtn = document.getElementById("clearAll");
+const taskInput = document.getElementById('taskInput');
+const taskDate = document.getElementById('taskDate');
+const addTaskBtn = document.getElementById('addTaskBtn');
+const taskList = document.getElementById('taskList');
+const totalTasks = document.getElementById('totalTasks');
+const completedTasks = document.getElementById('completedTasks');
+const pendingTasks = document.getElementById('pendingTasks');
+const clearAll = document.getElementById('clearAll');
 
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+function updateStats() {
+  totalTasks.textContent = tasks.length;
+  const done = tasks.filter(t => t.done).length;
+  completedTasks.textContent = done;
+  pendingTasks.textContent = tasks.length - done;
+}
 
 function saveTasks() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 function renderTasks() {
-  taskList.innerHTML = "";
-  tasks.forEach((task, index) => {
-    const li = document.createElement("li");
-    li.textContent = `${task.text} (${new Date(task.datetime).toLocaleString("ar-SA")})`;
-
-    if (task.completed) li.classList.add("completed");
-
-    li.addEventListener("click", () => {
-      task.completed = !task.completed;
-      saveTasks();
-      renderTasks();
-    });
-
-    const delBtn = document.createElement("button");
-    delBtn.textContent = "🗑️";
-    delBtn.onclick = (e) => {
-      e.stopPropagation();
-      tasks.splice(index, 1);
-      saveTasks();
-      renderTasks();
-    };
-
-    li.appendChild(delBtn);
+  taskList.innerHTML = '';
+  tasks.forEach((task, i) => {
+    const li = document.createElement('li');
+    li.className = task.done ? 'completed' : '';
+    li.innerHTML = `
+      <span>${task.text} ${task.date ? '📅 ' + task.date : ''}</span>
+      <div>
+        <button onclick="toggleTask(${i})">✔</button>
+        <button onclick="deleteTask(${i})">🗑</button>
+      </div>
+    `;
     taskList.appendChild(li);
   });
-
-  totalTasksEl.textContent = tasks.length;
-  completedTasksEl.textContent = tasks.filter(t => t.completed).length;
-  remainingTasksEl.textContent = tasks.filter(t => !t.completed).length;
+  updateStats();
 }
 
-addBtn.addEventListener("click", () => {
+function addTask() {
   const text = taskInput.value.trim();
-  const datetime = taskTime.value;
-  if (!text || !datetime) {
-    alert("يرجى إدخال نص المهمة ووقتها.");
-    return;
-  }
-  tasks.push({ text, datetime, completed: false });
-  taskInput.value = "";
-  taskTime.value = "";
+  const date = taskDate.value;
+  if (!text) return alert('اكتب مهمة أولاً!');
+  tasks.push({ text, date, done: false });
   saveTasks();
   renderTasks();
-});
+  taskInput.value = '';
+  taskDate.value = '';
+}
 
-clearAllBtn.addEventListener("click", () => {
-  if (confirm("هل أنت متأكد من حذف جميع المهام؟")) {
+function toggleTask(i) {
+  tasks[i].done = !tasks[i].done;
+  saveTasks();
+  renderTasks();
+}
+
+function deleteTask(i) {
+  tasks.splice(i, 1);
+  saveTasks();
+  renderTasks();
+}
+
+clearAll.onclick = () => {
+  if (confirm('هل أنت متأكد من مسح جميع المهام؟')) {
     tasks = [];
     saveTasks();
     renderTasks();
   }
-});
+};
 
-renderTasks();
+addTaskBtn.onclick = addTask;
+window.onload = renderTasks;
