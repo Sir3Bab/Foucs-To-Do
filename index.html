@@ -3,32 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>قائمة المهام</title>
+  <title>قائمة المهام 📋</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
 </head>
 <body>
   <div class="container">
-    <h1>📝 قائمة المهام</h1>
-    <div class="input-group">
+    <h1>📋 قائمة المهام</h1>
+    <div class="input-section">
       <input type="text" id="taskInput" placeholder="أضف مهمة جديدة...">
       <input type="datetime-local" id="taskDate">
       <button id="addTaskBtn">إضافة</button>
     </div>
-
-    <div class="stats">
-      <p>المهام الكلية: <span id="totalTasks">0</span></p>
-      <p>المنجزة: <span id="completedTasks">0</span></p>
-      <p>المتبقية: <span id="pendingTasks">0</span></p>
-    </div>
-
     <ul id="taskList"></ul>
 
-    <button id="clearAll">مسح جميع المهام</button>
+    <div class="stats">
+      <p>إجمالي المهام: <span id="totalTasks">0</span></p>
+      <p>المهام المكتملة: <span id="completedTasks">0</span></p>
+      <p>المتبقية: <span id="remainingTasks">0</span></p>
+    </div>
+
+    <button id="clearTasksBtn">🗑️ مسح جميع المهام</button>
+    <footer>تم التطوير بواسطة ❤️ <span>Sir3bab</span> | 2025</footer>
   </div>
 
-  <footer>
-    تم التطوير بواسطة <span class="name">Sir3bab ❤️</span> | 2025
-  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
