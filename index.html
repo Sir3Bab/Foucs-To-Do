@@ -1,35 +1,35 @@
 <!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>قائمة المهام - Focus To-Do</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <h1>📋 قائمة المهام</h1>
-    <div class="input-area">
-      <input type="text" id="taskInput" placeholder="أضف مهمة جديدة..." />
-      <input type="datetime-local" id="taskTime" />
-      <button id="addBtn" type="button">إضافة</button>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>قائمة المهام 📝</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main-box">
+      <h1>قائمة المهام 📝</h1>
+      <div class="input-box">
+        <input type="text" id="taskInput" placeholder="أضف مهمة جديدة..." />
+        <input type="datetime-local" id="taskTime" />
+        <button id="addBtn">إضافة</button>
+      </div>
+
+      <ul id="taskList"></ul>
+
+      <div class="stats">
+        <p>إجمالي المهام: <span id="totalTasks">0</span></p>
+        <p>المهام المكتملة: <span id="completedTasks">0</span></p>
+        <p>المتبقية: <span id="remainingTasks">0</span></p>
+      </div>
+
+      <button id="clearAll">🗑️ مسح جميع المهام</button>
     </div>
 
-    <ul id="taskList"></ul>
+    <footer>
+      تم التطوير بواسطة <b>Sir3bab</b> 💖 | 2025
+    </footer>
 
-    <div class="stats">
-      <p>المهام الكلية: <span id="totalTasks">0</span></p>
-      <p>المنجزة: <span id="completedTasks">0</span></p>
-      <p>المتبقية: <span id="remainingTasks">0</span></p>
-    </div>
-
-    <button id="clearAllBtn" class="clear">🗑️ مسح جميع المهام</button>
-  </div>
-
-  <footer>
-    <p>تم التطوير بواسطة <strong>Sir3bab</strong> ❤️ | 2025</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
