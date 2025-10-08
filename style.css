@@ -1,85 +1,75 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap');
-
-* {
-  font-family: 'Cairo', sans-serif;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
 body {
-  background: radial-gradient(circle at center, #007d91, #002f3a);
-  min-height: 100vh;
+  font-family: 'Cairo', sans-serif;
+  background: linear-gradient(135deg, #006d77, #00b4d8);
+  color: #fff;
+  margin: 0;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  color: white;
+  justify-content: center;
+  overflow: hidden;
   transition: background 1s ease-in-out;
 }
 
 .container {
-  background: rgba(0, 0, 0, 0.4);
-  padding: 30px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 30px 40px;
   border-radius: 20px;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-  width: 90%;
-  max-width: 600px;
   text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 1.5s ease-in-out;
 }
 
 h1 {
   margin-bottom: 20px;
+  color: #fff;
   font-size: 2rem;
 }
 
-.input-group {
+.input-section {
   display: flex;
   gap: 10px;
   justify-content: center;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
-.input-group input,
-button {
+input, button {
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   font-size: 1rem;
 }
 
 #taskInput {
-  flex: 1;
+  width: 220px;
 }
 
-button {
+#addTaskBtn {
   background: #00bfa6;
   color: white;
   cursor: pointer;
   transition: 0.3s;
 }
 
-button:hover {
-  background: #00947e;
+#addTaskBtn:hover {
+  background: #009f8a;
+  transform: scale(1.05);
 }
 
 ul {
   list-style: none;
-  margin-top: 15px;
-  text-align: right;
-  max-height: 300px;
-  overflow-y: auto;
+  padding: 0;
+  margin: 20px 0;
 }
 
 li {
   background: rgba(255, 255, 255, 0.1);
-  margin-bottom: 10px;
+  margin: 10px 0;
   padding: 10px;
   border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
 li.completed {
@@ -87,13 +77,32 @@ li.completed {
   opacity: 0.6;
 }
 
-footer {
-  margin-top: 20px;
-  font-size: 0.9rem;
-  color: #ccc;
+.stats {
+  margin-top: 10px;
+  font-size: 1rem;
 }
 
-.name {
-  color: #ff4f70;
-  font-weight: bold;
+#clearTasksBtn {
+  margin-top: 20px;
+  background: #e63946;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#clearTasksBtn:hover {
+  background: #c1121f;
+}
+
+footer {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
